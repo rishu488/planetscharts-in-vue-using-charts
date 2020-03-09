@@ -1,18 +1,37 @@
 <template>
+  
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <canvas id="planet-chart"></canvas>
   </div>
 </template>
 
+
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
+import chart from "chart.js";
+import planetChartData from './chart-data.js';
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  
+
+  methods: {
+  createChart(chartId, chartData) {
+    const ctx = document.getElementById(chartId);
+    const myChart = new chart(ctx, {
+      type: chartData.type,
+      data: chartData.data,
+      options: chartData.options,
+    });
+    myChart;
   }
+},
+data() {
+  return {
+    planetChartData: planetChartData,
+  }
+},mounted() {
+  this.createChart('planet-chart', this.planetChartData);
+}
 }
 </script>
 
